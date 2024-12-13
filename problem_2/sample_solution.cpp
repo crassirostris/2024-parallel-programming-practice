@@ -1,32 +1,32 @@
 #include <iostream>
 #include <vector>
-#include <cstdint>
 #include <algorithm>
-#include <iomanip>
 
+void generate_sampled_output(size_t length, size_t a, size_t b, size_t p, size_t output_sampling) {
+    std::vector<size_t> sampled_elements;
+    size_t current = a % p;
 
-std::vector<size_t> read_array() {
-    size_t length, a, b, p;
-    std::cin >> length >> a >> b >> p;
-    std::vector<size_t> result(length);
-    result[0] = a % p;
-    for (size_t i = 1; i < result.size(); ++i) {
-        result[i] = (result[i - 1] * a + b) % p;
+    // Collect samples directly
+    for (size_t i = 0; i < length; ++i) {
+        if (i % output_sampling == 0) {
+            sampled_elements.push_back(current);
+        }
+        current = (current * a + b) % p;
     }
-    return result;
-}
 
+    // Sort the sampled elements
+    std::sort(sampled_elements.begin(), sampled_elements.end());
 
-int main() {
-    auto array = read_array();
-    std::sort(array.begin(), array.end());
-
-    size_t k;
-    std::cin >> k;
-    for (size_t i = k - 1; i < array.size(); i += k) {
-        std::cout << array[i] << ' ';
+    // Output the results
+    for (const auto& elem : sampled_elements) {
+        std::cout << elem << " ";
     }
     std::cout << "\n";
+}
 
+int main() {
+    size_t length, a, b, p, output_sampling;
+    std::cin >> length >> a >> b >> p >> output_sampling;
+    generate_sampled_output(length, a, b, p, output_sampling);
     return 0;
 }

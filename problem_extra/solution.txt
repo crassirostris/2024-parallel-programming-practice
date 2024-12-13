@@ -1,0 +1,11 @@
+# Problem 3: Sort an Array
+
+This task is worth 6 advanced points.
+Theoretical problem: given a linked list represented as an array where each element points to its successor, determine the rank (distance from the head) of each node. Full grade is given for a solution with O(n) work.
+You can submit this task by adding .pdf or .tex file to this folder in your pull request.
+
+To give a solution in O(n) time, I first would initialize a rank array with -1 to indicate the univisited nodes.
+Starting from the head at index 0, I set its rank to 0 and then traverse the list using the successor indexes,
+and updating the ranks of each visited node as one more than the predecessor..
+This traversal stops when we reach a node that point to -1(end of list).
+Nodes wich are not reachable from the head will keep a rank -1. Visiting each node once ensures O(n) complexity.
