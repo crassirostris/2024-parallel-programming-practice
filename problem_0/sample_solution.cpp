@@ -126,7 +126,6 @@ int main()
     }
 
     int root = sqrt_int128(n);
-    // cout << root << "\n";
 
     std::vector<__int128>
         factors;
@@ -153,7 +152,6 @@ int main()
             workers[i].lf = workers[i - 1].rg + 1;
             workers[i].rg = root;
         }
-        // cout << workers[i].id << "     " << workers[i].lf << " " << workers[i].rg << "\n";
         pthread_create(&workers[i].thread, NULL, find, &workers[i]);
     }
 
@@ -162,10 +160,6 @@ int main()
 
     for (int i = 0; i < 16; i++)
     {
-        // cout << workers[i].id << " ";
-        // for (auto x : partial_answers[i])
-        //     cout << x << " ";
-        // cout << "\n";
         vector<__int128> aux;
         for (auto x : partial_answers[i])
         {
@@ -177,10 +171,6 @@ int main()
         }
         for (auto x : aux)
             final_answer.push_back(x);
-        // cout << "                          ";
-        // for (auto x : final_answer)
-        //     cout << x << " ";
-        // cout << "\n";
     }
 
     for (auto x : final_answer)
